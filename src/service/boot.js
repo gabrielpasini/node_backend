@@ -7,6 +7,7 @@ app.use(express.urlencoded({ extended: false }));
 
 require('../controllers/authController')(app);
 require('../controllers/productsController')(app);
+require('../controllers/cartController')(app);
 
 module.exports = (err) => {
     if (err) {
