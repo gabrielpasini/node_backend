@@ -6,6 +6,15 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
+        const products =  await Product.find(req.body);
+        return res.status(200).send(products);
+    } catch (err) {
+        return res.status(400).send({ error: err, message: 'Search error!'});
+    }
+});
+
+router.get('/all', async (req, res) => {
+    try {
         const products =  await Product.find();
         return res.status(200).send(products);
     } catch (err) {
