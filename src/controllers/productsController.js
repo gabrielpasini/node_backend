@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   try {
     let products = [];
     const response = await Product.find();
-    const ids = req.body.ids;
+    const ids = req.params.ids;
     if (ids) {
       products = ids.map(id => {
         const product = response.find(p => p._id.toString() === id);
