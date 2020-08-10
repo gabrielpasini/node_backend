@@ -5,30 +5,33 @@ const Product = require('../models/product');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    try {
-        const products =  await Product.find(req.body);
-        return res.status(200).send(products);
-    } catch (err) {
-        return res.status(400).send({ error: err, message: 'Search error!'});
+  try {
+    let products = [];
+    const response = await Product.find();
+    const ids = req.body.ids;
+    if (ids) {
+      products = ids.map(id => {
+        const product = response.find(p => p._id.toString() === id);
+        if (product) {
+          return product;
+        }
+      });
+    } else {
+      products = response;
     }
-});
-
-router.get('/all', async (req, res) => {
-    try {
-        const products =  await Product.find();
-        return res.status(200).send(products);
-    } catch (err) {
-        return res.status(400).send({ error: err, message: 'Search error!'});
-    }
+    return res.status(200).send(products);
+  } catch (err) {
+    return res.status(400).send({ error: err, message: 'Search error!'});
+  }
 });
 
 router.get('/:id', async (req, res) => {
-    try {
-        const productSearched = await Product.findById(req.params.id);
-        return res.status(200).send(productSearched);
-    } catch (err) {
-        return res.status(400).send({ error: err, message: 'Search error!'});
-    }
+  try {
+    const productSearched = await Product.findById(req.params.id);
+    return res.status(200).send(productSearched);
+  } catch (err) {
+    return res.status(400).send({ error: err, message: 'Search error!'});
+  }
 });
 
 router.delete('/:id', async (req, res) => {
