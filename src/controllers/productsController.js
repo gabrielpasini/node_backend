@@ -6,19 +6,23 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    let products = [];
     const response = await Product.find();
-    const ids = req.params.ids;
-    if (ids) {
-      products = ids.map(id => {
-        const product = response.find(p => p._id.toString() === id);
-        if (product) {
-          return product;
-        }
-      });
-    } else {
-      products = response;
-    }
+    return res.status(200).send(response);
+  } catch (err) {
+    return res.status(400).send({ error: err, message: 'Search error!'});
+  }
+});
+
+router.get('/:ids', async (req, res) => {
+  try {
+    const response = await Product.find();
+    const ids = JSON.parse(req.params.ids);
+    const products = ids.map(id => {
+      const product = response.find(p => p._id.toString() === id);
+      if (product) {
+        return product;
+      }
+    });
     return res.status(200).send(products);
   } catch (err) {
     return res.status(400).send({ error: err, message: 'Search error!'});
