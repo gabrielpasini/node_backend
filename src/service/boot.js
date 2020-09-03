@@ -13,6 +13,7 @@ app.use(function(req, res, next) {
 require('../controllers/authController')(app);
 require('../controllers/productsController')(app);
 require('../controllers/cartController')(app);
+require('../controllers/correiosStatusController')(app);
 
 module.exports = (err) => {
     if (err) {
