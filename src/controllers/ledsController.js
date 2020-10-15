@@ -16,13 +16,13 @@ router.post('/', async (req, res) => {
         console.log(req.query.valor);
         const payload = req.query.valor;
         switch (payload) {
-            case 0:
-                client.publish('/led_pc/rainbow', 0);
-                client.publish('/led_lamp/rainbow', 0);
+            case '0':
+                client.publish('/led_pc/rainbow', '0');
+                client.publish('/led_lamp/rainbow', '0');
                 break;
-            case 1:
-                client.publish('/led_pc/rainbow', 1);
-                client.publish('/led_lamp/rainbow', 1);
+            case '1':
+                client.publish('/led_pc/rainbow', '1');
+                client.publish('/led_lamp/rainbow', '1');
                 break;
             case 'vermelho':
                 client.publish('/led_pc/corFixa', '#FF0000');
