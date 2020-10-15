@@ -14,6 +14,7 @@ require('../controllers/authController')(app);
 require('../controllers/productsController')(app);
 require('../controllers/cartController')(app);
 require('../controllers/correiosStatusController')(app);
+require('../controllers/ledsController')(app);
 
 module.exports = (err) => {
     if (err) {
