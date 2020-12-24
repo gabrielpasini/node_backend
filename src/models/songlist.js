@@ -5,6 +5,14 @@ const SonglistSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  pedinte: {
+    type: String,
+    require: true,
+  },
+  corPedinte: {
+    type: String,
+    require: true,
+  }
 });
 
 const Songlist = mongoose.model("Songlist", SonglistSchema);
