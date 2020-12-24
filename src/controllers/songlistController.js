@@ -20,6 +20,19 @@ router.get("/:songId", async (req, res) => {
   }
 });
 
+router.put("/:songId", async (req, res) => {
+  try {
+    const musicSearched = await Songlist.find({ songId: req.params.songId });
+    console.log(musicSearched);
+    musicSearched.jaFoiTocada = true;
+    const musicUpdated = await Songlist.findByIdAndUpdate(musicSearched);
+    console.log(musicUpdated);
+    return res.status(200).send(musicUpdated);
+  } catch (err) {
+    return res.status(400).send({ error: err, message: "Update error!" });
+  }
+});
+
 router.post("/clean/:ids", async (req, res) => {
   try {
     const ids = JSON.parse(req.params.ids);

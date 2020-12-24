@@ -12,7 +12,12 @@ const SonglistSchema = new mongoose.Schema({
   corPedinte: {
     type: String,
     require: true,
-  }
+  },
+  jaFoiTocada: {
+    type: Boolean,
+    require: false,
+    default: false,
+  },
 });
 
 const Songlist = mongoose.model("Songlist", SonglistSchema);
