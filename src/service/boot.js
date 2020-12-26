@@ -20,6 +20,7 @@ require("../controllers/cartController")(app);
 require("../controllers/correiosStatusController")(app);
 require("../controllers/ledsController")(app);
 require("../controllers/songlistController")(app);
+require("../controllers/leaderboardController")(app);
 
 module.exports = (err) => {
   if (err) {

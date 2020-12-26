@@ -1,5 +1,6 @@
 const express = require("express");
 const Songlist = require("../models/songlist");
+const Leaderboard = require("../models/leaderboard");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -60,7 +61,22 @@ router.post("/clean/:ids", async (req, res) => {
 router.post("/new", async (req, res) => {
   try {
     const songlist = await Songlist.create(req.body);
-    return res.status(200).send({ songlist });
+    let userInRank = await Leaderboard.findOne({
+      usuario: req.body.pedinte,
+    });
+    if (!userInRank) {
+      userInRank = await Leaderboard.create({
+        usuario: req.body.pedinte,
+        corUsuario: req.body.corPedinte,
+      });
+    }
+    const userUpdated = await Leaderboard.findByIdAndUpdate(
+      { _id: userInRank._id },
+      { $inc: { pedidos: 1 } }
+    );
+    return res
+      .status(200)
+      .send({ songlist: songlist, userInRank: userUpdated });
   } catch (err) {
     return res.status(400).send({ error: err, message: "Register error!" });
   }
