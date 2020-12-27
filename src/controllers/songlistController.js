@@ -33,26 +33,10 @@ router.put("/:songId", async (req, res) => {
   }
 });
 
-router.post("/clean/:ids", async (req, res) => {
+router.post("/clear", async (req, res) => {
   try {
-    const ids = JSON.parse(req.params.ids);
-    const promises = ids.map((songId) =>
-      Songlist.findOneAndDelete({
-        songId,
-      })
-    );
-    const results = await Promise.all(promises);
-    const musicsDeleted = [];
-    results.map((res) => {
-      if (res) {
-        musicsDeleted.push(res);
-      }
-    });
-    if (musicsDeleted.length === ids.length) {
-      return res.status(200).send({ success: "Songlist cleaned!" });
-    } else {
-      return res.status(400).send({ message: "Clean error, music not found!" });
-    }
+    await Songlist.deleteMany();
+    return res.status(200).send({ success: "Songlist cleaned!" });
   } catch (err) {
     return res.status(400).send({ error: err, message: "Delete error!" });
   }
