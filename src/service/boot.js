@@ -21,6 +21,7 @@ require("../controllers/correiosStatusController")(app);
 require("../controllers/ledsController")(app);
 require("../controllers/songlistController")(app);
 require("../controllers/leaderboardController")(app);
+require("../controllers/emailController")(app);
 
 module.exports = (err) => {
   if (err) {
@@ -30,6 +31,6 @@ module.exports = (err) => {
     if (err) {
       return console.log("erro");
     }
-    console.log(`Servidor iniciou em http://localhost:${process.env.PORT}`);
+    console.log(`Servidor iniciado em http://localhost:${process.env.PORT}`);
   });
 };

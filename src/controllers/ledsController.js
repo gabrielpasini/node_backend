@@ -8,7 +8,7 @@ const client = mqtt.connect(process.env.MQTT_BROKER, {
 });
 
 client.on("connect", () => {
-  console.log(`Conectado ao broker MQTT: ${client.options.host}`);
+  console.log(`Conectado ao broker ${process.env.MQTT_BROKER}`);
 });
 
 router.post("/", async (req, res) => {
