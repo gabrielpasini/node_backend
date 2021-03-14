@@ -57,7 +57,11 @@ router.post("/uti-aux", async (req, res) => {
   } catch (err) {
     return res
       .status(400)
-      .send({ error: err, status: "error", message: "E-mail error!" });
+      .send({
+        error: err,
+        status: "error",
+        message: "Erro no serviço de e-mail, tente novamente mais tarde...",
+      });
   }
 });
 
