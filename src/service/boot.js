@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const router = express.Router();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -13,6 +14,9 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+router.get("/", async (req, res) => res.redirect(process.env.FRONTEND_URL));
+app.use("/", router);
 
 require("../app/controllers/index")(app);
 
