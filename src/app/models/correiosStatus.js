@@ -1,4 +1,4 @@
-const mongoose = require("../database");
+const mongoose = require("../../database");
 
 const CorreiosStatusSchema = new mongoose.Schema({
   id: {

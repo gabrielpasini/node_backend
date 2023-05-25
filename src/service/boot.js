@@ -14,14 +14,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-require("../controllers/authController")(app);
-require("../controllers/productsController")(app);
-require("../controllers/cartController")(app);
-require("../controllers/correiosStatusController")(app);
-require("../controllers/ledsController")(app);
-require("../controllers/songlistController")(app);
-require("../controllers/leaderboardController")(app);
-require("../controllers/emailController")(app);
+require("../app/controllers/index")(app);
 
 module.exports = (err) => {
   if (err) {

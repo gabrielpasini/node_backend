@@ -1,4 +1,4 @@
-const mongoose = require("../database");
+const mongoose = require("../../database");
 
 const SonglistSchema = new mongoose.Schema({
   songId: {
