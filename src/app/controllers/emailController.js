@@ -17,16 +17,16 @@ console.log(`Transporter iniciado no e-mail ${transporter.options.auth.user}`);
 
 router.post("/gabriel", async (req, res) => {
   try {
-    const payload = req.body;
-    const email = {
-      from: `${payload.nome} <${payload.email}>`,
-      subject: `CONTATO VIA PORTFÓLIO - ${payload.assunto}`,
-      to: [payload.email, process.env.EMAIL_INBOX],
-      text: payload.mensagem,
+    const { email, mensagem } = req.body;
+    const emailToSend = {
+      from: `<${email}>`,
+      subject: `CONTATO VIA PORTFÓLIO`,
+      to: [email, process.env.EMAIL_INBOX],
+      text: mensagem,
     };
-    await transporter.sendMail(email);
+    await transporter.sendMail(emailToSend);
     return res.status(200).send({
-      email,
+      email: emailToSend,
       status: "success",
       message: "E-mail enviado com sucesso!",
     });
